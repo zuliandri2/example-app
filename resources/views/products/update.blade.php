@@ -6,8 +6,9 @@
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <form class="mt-6 space-y-6">
-                <x-text-input id="id" class="block mt-1 w-full" type="hidden" name="email" :value="$model->id" required autocomplete="id" />
+            <form class="mt-6 space-y-6" method="post" action="{{ route('products.post.update') }}" enctype="multipart/form-data">
+                @csrf
+                <x-text-input id="id" class="block mt-1 w-full" type="hidden" name="id" :value="$model->id" required autocomplete="id" />
                 <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                     @include("products.form", ["model" => $model])
                 </div>

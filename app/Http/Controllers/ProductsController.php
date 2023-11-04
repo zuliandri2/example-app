@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductCreateRequest;
+use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Products;
 use App\services\Products\CreateProductService;
 use Illuminate\Http\RedirectResponse;
@@ -61,6 +62,17 @@ class ProductsController extends Controller
         if ($validate->fails()) redirect("products");
         $products = Products::find($id);
         return \view('products.update', ["model" => $products]);
+    }
+
+    public function postUpdate(ProductUpdateRequest $request)
+    {
+        $product = new CreateProductService($request);
+        $product->product = Products::find($request->id);
+        if ($product->save()) {
+            return redirect('products');
+        }
+
+        return redirect('products.update');
     }
 
     public function show(): View

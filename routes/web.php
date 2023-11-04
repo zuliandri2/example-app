@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/products/create', [\App\Http\Controllers\ProductsController::class, 'postCreate'])->name('products.postcreate');
     Route::get('/products/delete/{id}', [\App\Http\Controllers\ProductsController::class, 'delete'])->name('products.delete');
     Route::get('/products/update/{id}', [\App\Http\Controllers\ProductsController::class, 'update'])->name('products.update');
+    Route::post('/products/update', [\App\Http\Controllers\ProductsController::class, 'postUpdate'])->name('products.post.update');
 });
 
 require __DIR__.'/auth.php';
