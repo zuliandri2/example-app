@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
+use function Termwind\renderUsing;
 
 class ProductsController extends Controller
 {
@@ -44,6 +45,21 @@ class ProductsController extends Controller
         if ($validate->fails()) redirect("products");
         $products = Products::find($id);
         return \view('products.update', ["model" => $products]);
+    }
+
+    public function show(): View
+    {
+        return \view('products.show');
+    }
+
+    public function showDetail($id): View
+    {
+        $validate = Validator::make(["id" => $id], ['id' => 'required|regex:/[0-9]+$/|digits_between:1,999999999']);
+        if ($validate->fails()) {
+            return redirect('products.show');
+        }
+        $products = Products::find($id);
+        return \view('products.showdetail', ["model" => $products]);
     }
 
 }
