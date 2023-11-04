@@ -9,7 +9,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100" style="display: flex">
                     <div class="product-container" style="width: 25%;height: 35%;flex: 50%;padding: 5%">
-                        <img src="{{ $model->image }}">
+                        <img src="{{ '/storage/' . $model->image }}">
                     </div>
                     <div style="flex: 50%;padding-top: 5%;">
                         <div><b>{!! $model->name !!}</b></div>

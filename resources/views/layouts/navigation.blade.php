@@ -15,12 +15,18 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('products')" :active="request()->routeIs('products')">
-                        {{ __('Products') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('products.show')" :active="request()->routeIs('products.show')">
-                        {{ __('Products') }}
-                    </x-nav-link>
+                    @if(\Illuminate\Support\Facades\Auth::check() and \Illuminate\Support\Facades\Auth::user()
+                    ->isManager())
+                        <x-nav-link :href="route('products')" :active="request()->routeIs('products')">
+                            {{ __('Products') }}
+                        </x-nav-link>
+                    @endif
+                    @if(\Illuminate\Support\Facades\Auth::check() and \Illuminate\Support\Facades\Auth::user()
+                    ->isUser())
+                        <x-nav-link :href="route('products.show')" :active="request()->routeIs('products.show')">
+                            {{ __('Products') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 

@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     @foreach(\App\Models\Products::all() as $k => $item)
                         <div class="product-container" style="width: 25%;height: 35%;display: inline-block; margin-right: 8%; margin-top: 5%; text-align: center">
-                            <img src="{{ $item->image }}">
+                            <img src="{{ '/storage/' . $item->image }}">
                             <a href="{{ route('products.show.detail', ["id" => $item->id])  }}"><strong>{!! $item->name
                             !!}</strong></a>
                             <div><strong>Rp. {{ $item->price }}</strong></div>
