@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductCreateRequest;
 use App\Models\Products;
+use App\services\Products\CreateProductService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 use function Termwind\renderUsing;
@@ -26,15 +29,28 @@ class ProductsController extends Controller
 
     public function postCreate(ProductCreateRequest $request): RedirectResponse
     {
-        $validate = $request->validated();
-        return redirect('products');
+        $crateProduct = new CreateProductService($request);
+        if ($crateProduct->save()) {
+            return redirect('products');
+        }
+
+        return redirect('products.create');
     }
 
     public function delete($id): RedirectResponse
     {
         $validate = Validator::make(["id" => $id], ['id' => 'required|regex:/[0-9]+$/|digits_between:1,999999999|']);
-        if (!$validate->fails()) {
+        if ($validate->fails()) {
             return redirect('products');
+        }
+
+        $product = Products::find($id);
+        $fileName = $product->image;
+        $path = storage_path('app/public/') . $fileName;
+        if ($product->delete()) {
+            if (File::exists($path)) {
+                Storage::disk('public')->delete($fileName);
+            }
         }
         return redirect('products');
     }

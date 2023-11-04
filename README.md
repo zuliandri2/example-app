@@ -13,6 +13,7 @@ System reqruitment
 - run command './vendor/bin/sail up -d' terminal
 - migrate all databases with type './vendor/bin/sail artisan migrate:fresh --seed'
 - type artisan './vendor/bin/sail db:seed --class=ProductsSeeder'
+- for store image in app type './vendor/bin/sail artisan storage:link'
 - type 'localhost' in web browser
 - done
 

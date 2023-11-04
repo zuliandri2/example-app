@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ProductCreateRequest extends FormRequest
 {
@@ -26,7 +27,7 @@ class ProductCreateRequest extends FormRequest
             'name' => 'required|max:255|string',
             'description' => 'required|max:500|string',
             'price' => 'required|regex:/[0-9]+$/|digits_between:1,999999999',
-            'image' => 'nullable|mimes:jpg,bmp,png'
+            'image' => 'required|image|max:1024'
         ];
     }
 
@@ -41,4 +42,23 @@ class ProductCreateRequest extends FormRequest
     protected $stopOnFirstFailure = true;
 
     protected $redirect = '/products/create';
+
+    public function validated($key = null, $default = null)
+    {
+        $validated = parent::validated($key, $default);
+        if (isset($validated['image'])) {
+            $image = $validated['image'];
+            $validated['image'] = $validated['id'] . '_' . $image->getClientOriginalName();
+        }
+        return $validated;
+    }
+
+    public function storeFile(): void
+    {
+        if ($this->hasFile('image')) {
+            Storage::putFileAs('public', $this->file('image'), $this->id . '_' . $this->file('image')->getClientOriginalName());
+        }
+    }
+
+
 }

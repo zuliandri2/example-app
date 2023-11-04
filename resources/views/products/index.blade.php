@@ -29,7 +29,7 @@
                             <td>{{$item->name}}</td>
                             <td>{{$item->description}}</td>
                             <td>{{$item->price}}</td>
-                            <td><img src="{{$item->image}}" class="w-28 h-16"></td>
+                            <td><img src="{{ '/storage/' . $item->image }}" class="w-28 h-16"></td>
                             <td><a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" title="{{__('Edit')}}" href="{{ route('products.update', ["id" => $item->id]) }}">{{__('Edit')}}</a> <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" title="{{__('Delete')}}" href="{{ route('products.delete', ["id" => $item->id]) }}">{{__("Delete")}}</a></td>
                         </tr>
                     @endforeach
