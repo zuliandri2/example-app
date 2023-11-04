@@ -14,3 +14,12 @@ System reqruitment
 - migrate all databases with type './vendor/bin/sail artisan migrate:fresh --seed'
 - type artisan './vendor/bin/sail db:seed --class=ProductsSeeder'
 - type 'localhost' in web browser
+
+
+## Architecture
+
+## How to use API
+
+## Database Design
+All action in db in this app base on laravel feature, like Create table, update or drop table. Init data using Seed     
+of laravel 
