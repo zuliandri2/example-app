@@ -14,6 +14,7 @@ System reqruitment
 - migrate all databases with type './vendor/bin/sail artisan migrate:fresh --seed'
 - type artisan './vendor/bin/sail db:seed --class=ProductsSeeder'
 - type 'localhost' in web browser
+- done
 
 
 ## Architecture
